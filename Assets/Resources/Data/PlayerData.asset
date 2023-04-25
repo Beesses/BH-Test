@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e402f9ec18226f945bed5e342eb1d405, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7077804760469677871, guid: 8d12d027066a7004f9aa49026169f0a2, type: 3}
+  spawnPoint: {x: 0, y: 0}
+  material: {fileID: 2100000, guid: 5ee656a644ca14b479e22616f052cc1f, type: 2}
+  invulMaterial: {fileID: 2100000, guid: 822adea8f0e1c164c802003af9b76e71, type: 2}
+  speed: 2
+  rushReloadTime: 4
+  initialVelocity: {x: 0, y: 0}
+  afterRushTime: 1
+  readyToRushTime: 1
+  rushCoef: 12
+  invulnerability: 3
