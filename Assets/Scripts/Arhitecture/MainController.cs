@@ -38,6 +38,7 @@ public sealed class MainController : MonoBehaviour
         if (instance is null)
             instance = this;
         InstanceControllers();
+        Cursor.lockState = CursorLockMode.Locked;
 
         foreach (var feature in OnAwakeList)
         {

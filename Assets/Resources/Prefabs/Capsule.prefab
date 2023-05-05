@@ -283,6 +283,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  rend: {fileID: 3057841975205327406}
 --- !u!114 &4900218549376154477
 MonoBehaviour:
   m_ObjectHideFlags: 0

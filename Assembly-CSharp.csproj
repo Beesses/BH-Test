@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{657A1347-DFA2-0FC2-F02E-2703B18A7944}</ProjectGuid>
+    <ProjectGuid>{02873306-EC93-B8D9-A45C-8E8B56DA2267}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Arhitecture\GameNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Data\Data.cs" />
     <Compile Include="Assets\Scripts\Arhitecture\MainController.cs" />
     <Compile Include="Assets\Scripts\MVC\Controllers\InputController.cs" />
@@ -64,14 +65,13 @@
     <Compile Include="Assets\Scripts\Interfaces\LifeCycle\IFixedUpdate.cs" />
     <Compile Include="Assets\Scripts\Services\NetworkServices\ServerService.cs" />
     <Compile Include="Assets\Scripts\Services\NetworkServices\PlayerNetworkBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Services\Camera\Camera.cs" />
+    <Compile Include="Assets\Scripts\Services\Camera\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Scripts\MVC\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Data\SO\SOBase.cs" />
     <Compile Include="Assets\Scripts\Interfaces\LifeCycle\IUpdate.cs" />
     <Compile Include="Assets\Scripts\Interfaces\LifeCycle\ILateUpdate.cs" />
     <Compile Include="Assets\Scripts\Data\SO\PlayerData.cs" />
-    <Compile Include="Assets\Scripts\Arhitecture\GameNetworkManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
@@ -800,43 +800,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Mirror.csproj">
-      <Project>{C38B40D2-ACB5-EDB9-B8CE-BADA1CA5C95F}</Project>
+      <Project>{221F7BFB-9C7F-D737-77C5-FAB19121815C}</Project>
       <Name>Mirror</Name>
     </ProjectReference>
     <ProjectReference Include="kcp2k.csproj">
-      <Project>{EEBBD232-AB63-713D-29A2-19DDBAAB3C58}</Project>
+      <Project>{CE0E586F-BFD6-79E7-A51B-27B8B32EB885}</Project>
       <Name>kcp2k</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">
-      <Project>{FFE620D5-1FEB-3C5A-6D9F-FF9A1923E321}</Project>
+      <Project>{A1C5997A-98C4-B3AA-3FA4-6D82AF565D39}</Project>
       <Name>Mirror.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Transports.csproj">
-      <Project>{8FC68350-5C39-C1C9-41FE-3182206A7D3E}</Project>
+      <Project>{72DDF2BE-7C27-375D-AD97-413A049AB9FC}</Project>
       <Name>Mirror.Transports</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{C268E081-57B5-6179-50F7-28F3B367F84C}</Project>
+      <Project>{FA48D78A-66C0-EB63-0C59-02335844894B}</Project>
       <Name>Mirror.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.CompilerSymbols.csproj">
-      <Project>{4834548C-0B06-2806-749E-49039F728C53}</Project>
+      <Project>{D1C54BC7-2364-3D54-A6A6-13DC321739E4}</Project>
       <Name>Mirror.CompilerSymbols</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Authenticators.csproj">
-      <Project>{5F620C7C-4E3E-D49E-F71D-18F2E8A57070}</Project>
+      <Project>{AF63617A-B04C-FCEB-F4FD-40CE52C0E40D}</Project>
       <Name>Mirror.Authenticators</Name>
     </ProjectReference>
     <ProjectReference Include="Telepathy.csproj">
-      <Project>{6F3AE09B-630C-FB6B-75F5-40613B565357}</Project>
+      <Project>{8EF05821-0A9E-28AC-6BFD-71A3F516AC4B}</Project>
       <Name>Telepathy</Name>
     </ProjectReference>
     <ProjectReference Include="SimpleWebTransport.csproj">
-      <Project>{998A06C0-0F25-F544-3F6F-F40B1C878DA6}</Project>
+      <Project>{D54623B7-B2C2-D307-B084-CAC74051471D}</Project>
       <Name>SimpleWebTransport</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
-      <Project>{3E74E5CB-A0B2-293C-7F62-D0784921B991}</Project>
+      <Project>{C06E95CD-20D8-A70C-0FD3-72E9D1CD2917}</Project>
       <Name>Mirror.Components</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,9 +1,9 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - Camera
     - GameNetworkManager
     - MainController
+    - PlayerCamera
     - PlayerData
     - PlayerNetworkBehaviour
     - ServerService
@@ -94,25 +94,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1528}
     - Class: 114
-      Script: {instanceID: 1578}
+      Script: {instanceID: 1576}
     - Class: 114
-      Script: {instanceID: 2468}
+      Script: {instanceID: 1620}
     - Class: 114
-      Script: {instanceID: 2670}
+      Script: {instanceID: 2464}
     - Class: 114
-      Script: {instanceID: 2880}
+      Script: {instanceID: 2666}
     - Class: 114
-      Script: {instanceID: 4538}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 4566}
+      Script: {instanceID: 4530}
     - Class: 114
-      Script: {instanceID: 4866}
+      Script: {instanceID: 4558}
     - Class: 114
-      Script: {instanceID: 6102}
+      Script: {instanceID: 4858}
     - Class: 114
-      Script: {instanceID: 6410}
+      Script: {instanceID: 6090}
     - Class: 114
-      Script: {instanceID: 53166}
+      Script: {instanceID: 6398}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -167,27 +167,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1528}
     - Class: 114
-      Script: {instanceID: 1578}
+      Script: {instanceID: 1576}
     - Class: 114
-      Script: {instanceID: 2670}
+      Script: {instanceID: 2666}
     - Class: 114
-      Script: {instanceID: 2880}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 3284}
+      Script: {instanceID: 3278}
     - Class: 114
-      Script: {instanceID: 4538}
+      Script: {instanceID: 4530}
     - Class: 114
-      Script: {instanceID: 4644}
+      Script: {instanceID: 4636}
     - Class: 114
-      Script: {instanceID: 4664}
+      Script: {instanceID: 4656}
     - Class: 114
-      Script: {instanceID: 5054}
+      Script: {instanceID: 5046}
     - Class: 114
-      Script: {instanceID: 6410}
+      Script: {instanceID: 6398}
     - Class: 114
-      Script: {instanceID: 7734}
+      Script: {instanceID: 7718}
     - Class: 114
-      Script: {instanceID: 8310}
+      Script: {instanceID: 8290}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -245,6 +245,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: bee89d40e67a4ccb2741e609e7afcf82
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameNetworkManager
   - hash:
       serializedVersion: 2
       Hash: 681b5f9be6f57e5a7b20908e503986d3
@@ -859,7 +865,7 @@ ScriptsOnlyBuild:
     className: NetworkRoomManager
   - hash:
       serializedVersion: 2
-      Hash: 5085c149ae898c11398927898b806b9c
+      Hash: 24bdd47aefaac9aaf167c45f7fd5bafd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerNetworkBehaviour
@@ -889,10 +895,10 @@ ScriptsOnlyBuild:
     className: UnityOnPointerClickMessageListener
   - hash:
       serializedVersion: 2
-      Hash: e6d7c3f81a3ccce7d2d9b3376a4543ba
+      Hash: ed7fd4b41d1cf51b6d8d169bab6f677b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Camera
+    className: PlayerCamera
   - hash:
       serializedVersion: 2
       Hash: 3618c1889fab43585d63e0ee59c37c96
@@ -1619,12 +1625,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 81c26393a5940cd2633c135ff9662556
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameNetworkManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity

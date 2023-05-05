@@ -24,6 +24,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
     private float vertical;
     private float step;
     private GameObject cam;
+    private bool isRush = false;
 
     States state = States.MOVING;
 
@@ -40,17 +41,22 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
 
     public void OnAwake()
     {
-        
+        if(_manager.isClient)
+        {
+            _manager.sync();
+        }
     }
 
     public void OnUpdate()
     {
         if (_playerNetwork.isLocalPlayer)
         {
-            cam = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
-            cam.transform.SetParent(_model.transform);
-            cam.transform.localPosition = new Vector3(0.61f, 1.03f, -3.34f);
-            cam.transform.localRotation = Quaternion.Euler(7, 0, 0);
+            if (cam == null)
+            {
+                cam = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
+                cam.transform.SetParent(_model.transform);
+                Debug.Log("camera");
+            }
             _manager.localPlayer.text = "My Points: " + _model.points;
             CheckColission();
         }
@@ -78,14 +84,23 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
             if (hitData.transform && hitData.distance < 0.14f && hitData.transform.tag == "Player")
             {
                 if (invul || hitData.transform == _model.transform) return;
-                if (state == States.RUSH || state == States.AFTER_RUSH && collisionTimer <= 0)
+                if (isRush && collisionTimer <= 0 && hitData.transform.GetComponent<Renderer>().material.color == Color.white)
                 {
                     collisionTimer = 2;
                     _model.points += 1;
-                    _manager.RpcGlobalText(_model.points, _model.player.GetInstanceID());
-                    Debug.Log(_model.points);
+                    if(_playerNetwork.isServer)
+                    {
+                        _manager.AddPlayer(_model.points, _model.player.GetInstanceID());
+                    }
+                    else
+                    {
+                        if (_model.points >= 3)
+                        {
+                            _playerNetwork.ReloadLevel();
+                        }
+                    }
                 }
-                else if (state != States.RUSH || state != States.AFTER_RUSH)
+                else if (!isRush)
                 {
                     invul = true;
                 }
@@ -144,14 +159,15 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
     {
         if(invul)
         {
+            _playerNetwork.CmdChangeColor(UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
             invulTimer += Time.fixedDeltaTime;
-            _model.player.GetComponent<Renderer>().material = _model.invulMaterial;
-            _model.invulMaterial.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-            if(invulTimer >= _model.invul)
+            //_model.player.GetComponent<Renderer>().material = _model.invulMaterial;
+            //_model.invulMaterial.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            if (invulTimer >= _model.invul)
             {
                 invul = false;
                 invulTimer = 0;
-                _model.player.GetComponent<Renderer>().material = _model.material;
+                _playerNetwork.CmdChangeColor(Color.white);
             }
         }
 
@@ -160,7 +176,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
             case States.MOVING:
                 if (horizontal != 0 || vertical != 0 || step != 0)
                 {
-                    _model.transform.rotation *= Quaternion.Euler(0f, horizontal * 1, 0f);
+                    _model.transform.rotation *= Quaternion.Euler(0f, horizontal * 1.5f, 0f);
                     _model.rigidbody.MovePosition(_model.transform.position + _model.transform.forward * vertical * _model.speed * Time.deltaTime + (_model.transform.right * step * _model.speed * Time.deltaTime));
                 }
                 break;
@@ -171,6 +187,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                 if (timer >= _model.rushTimer)
                 {
                     timer = 0;
+                    isRush = true;
                     state = States.RUSH;
                 }
                 Debug.Log(state);
@@ -187,6 +204,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                     timer = 0;
                     state = States.MOVING;
                     Debug.Log(state);
+                    isRush = false;
                     break;
                 }
                 break;

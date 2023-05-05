@@ -18,7 +18,6 @@ MonoBehaviour:
   invulMaterial: {fileID: 2100000, guid: 822adea8f0e1c164c802003af9b76e71, type: 2}
   speed: 2
   rushReloadTime: 4
-  initialVelocity: {x: 0, y: 0}
   afterRushTime: 1
   readyToRushTime: 1
   rushCoef: 12
