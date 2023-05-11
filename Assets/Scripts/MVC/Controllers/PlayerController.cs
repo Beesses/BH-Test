@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public enum States
 {
@@ -45,6 +43,10 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
         {
             _manager.sync();
         }
+        if (_playerNetwork.isLocalPlayer)
+        {
+            _manager.localPlayer.text = "My Points: " + _model.points;
+        }
     }
 
     public void OnUpdate()
@@ -55,9 +57,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
             {
                 cam = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
                 cam.transform.SetParent(_model.transform);
-                Debug.Log("camera");
             }
-            _manager.localPlayer.text = "My Points: " + _model.points;
             CheckColission();
         }
     }
@@ -88,7 +88,8 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                 {
                     collisionTimer = 2;
                     _model.points += 1;
-                    if(_playerNetwork.isServer)
+                    _manager.localPlayer.text = "My Points: " + _model.points;
+                    if (_playerNetwork.isServer)
                     {
                         _manager.AddPlayer(_model.points, _model.player.GetInstanceID());
                     }
@@ -100,7 +101,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                         }
                     }
                 }
-                else if (!isRush)
+                else if (!isRush && hitData.transform.GetComponent<Renderer>().material.color == new Color(1, 1, 1, 2))
                 {
                     invul = true;
                 }
@@ -134,6 +135,24 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
         _model.rays.Add(new Ray(_model.transform.position, _model.transform.right - _model.transform.forward * 2));
         _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right - _model.transform.forward * 2));
         _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right + _model.transform.forward * 2));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.forward * 1.5f + _model.transform.right));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.right * 1.5f - _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right * 1.5f - _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right * 1.5f + _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.forward + _model.transform.right * 1.5f));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.right - _model.transform.forward * 1.5f));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right - _model.transform.forward * 1.5f));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right + _model.transform.forward * 1.5f));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.forward * 0.25f + _model.transform.right));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.right * 0.25f - _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right * 0.25f - _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right * 0.25f + _model.transform.forward));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.forward + _model.transform.right * 0.25f));
+        _model.rays.Add(new Ray(_model.transform.position, _model.transform.right - _model.transform.forward * 0.25f));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right - _model.transform.forward * 0.25f));
+        _model.rays.Add(new Ray(_model.transform.position, -_model.transform.right + _model.transform.forward * 0.25f));
+
+
     }
 
     public void Moving(float hor, float vert)
@@ -161,8 +180,6 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
         {
             _playerNetwork.CmdChangeColor(UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
             invulTimer += Time.fixedDeltaTime;
-            //_model.player.GetComponent<Renderer>().material = _model.invulMaterial;
-            //_model.invulMaterial.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             if (invulTimer >= _model.invul)
             {
                 invul = false;
@@ -188,6 +205,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                 {
                     timer = 0;
                     isRush = true;
+                    _playerNetwork.CmdChangeColor(new Color(1, 1, 1, 2));
                     state = States.RUSH;
                 }
                 Debug.Log(state);
@@ -205,6 +223,7 @@ public sealed class PlayerController : IFixedUpdate, IUpdate, IAwake
                     state = States.MOVING;
                     Debug.Log(state);
                     isRush = false;
+                    _playerNetwork.CmdChangeColor(Color.white);
                     break;
                 }
                 break;
