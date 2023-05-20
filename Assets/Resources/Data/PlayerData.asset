@@ -20,5 +20,5 @@ MonoBehaviour:
   rushReloadTime: 4
   afterRushTime: 1
   readyToRushTime: 1
-  rushCoef: 12
+  rushCoef: 9
   invulnerability: 3

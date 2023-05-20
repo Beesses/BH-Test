@@ -10,6 +10,9 @@ public class PlayerNetworkBehaviour : NetworkBehaviour
     Material material;
     [SyncVar(hook = nameof(SetColor))]
     public Color playerColor = Color.white;
+
+    [SyncVar(hook = nameof(SetBool))]
+    public bool invul = false;
     private void Awake()
     {
         material = this.gameObject.GetComponent<Renderer>().material;
@@ -52,5 +55,54 @@ public class PlayerNetworkBehaviour : NetworkBehaviour
     public void ReloadLevel()
     {
         isOver = true;
+    }
+
+    void SetBool(bool oldBool, bool newBool)
+    {
+        invul = newBool;
+    }
+
+    [Server]
+    public void ChangeBool(bool newBool)
+    {
+        invul = newBool;
+    }
+
+    [Command]
+    public void CmdChangeBool(bool newBool)
+    {
+        ChangeBool(newBool);
+    }
+
+    [Command]
+    public void CmdFoundPlayer(Transform id)
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach(var player in players)
+        {
+            if(player.transform == id)
+            {
+                player.GetComponent<PlayerNetworkBehaviour>().CmdChangeBool(true);
+                break;
+            }
+        }
+    }
+
+    [Command]
+    public void CmdFoundLocalPlayer(Transform id)
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
+        {
+            if (player.transform == id)
+            {
+                player.GetComponent<PlayerNetworkBehaviour>().ChangeBool(true);
+                break;
+            }
+        }
     }
 }

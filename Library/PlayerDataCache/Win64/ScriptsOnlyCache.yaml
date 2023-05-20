@@ -187,7 +187,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7718}
     - Class: 114
-      Script: {instanceID: 8290}
+      Script: {instanceID: 8292}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -865,7 +865,7 @@ ScriptsOnlyBuild:
     className: NetworkRoomManager
   - hash:
       serializedVersion: 2
-      Hash: 24bdd47aefaac9aaf167c45f7fd5bafd
+      Hash: b8e57f72acb0835b783eeb6edd8ebbc3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerNetworkBehaviour
